@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { motion } from 'framer-motion';
-import { FiTerminal, FiGithub, FiLinkedin, FiMail, FiDownload, FiVolume2, FiVolumeX, FiInfo } from 'react-icons/fi';
+import { FiTerminal, FiGithub, FiLinkedin, FiMail, FiDownload, FiVolume2, FiVolumeX, FiInfo, FiFolder, FiFile, FiArrowRight } from 'react-icons/fi';
 import { useSounds } from './SoundManager';
 import GitHubActivity from './GitHubActivity';
 import NeofetchDisplay from './NeofetchDisplay';
@@ -12,10 +12,22 @@ type Command = {
   output: React.ReactNode;
 };
 
+// Define virtual file system structure
+interface FileSystemItem {
+  name: string;
+  type: 'file' | 'directory';
+  content?: string | React.ReactNode;
+  color?: string;
+}
+
+interface FileSystem {
+  [path: string]: FileSystemItem[];
+}
+
 // Available commands for tab completion
 const AVAILABLE_COMMANDS = [
   'help', 'about', 'skills', 'projects', 'contact', 'clear', 'exit', 
-  'resume', 'sound', 'github', 'neofetch'
+  'resume', 'sound', 'github', 'neofetch', 'ls', 'cd', 'cat'
 ];
 
 export default function Terminal() {
@@ -25,9 +37,246 @@ export default function Terminal() {
   const [cursorVisible, setCursorVisible] = useState(true);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [currentDirectory, setCurrentDirectory] = useState('/');
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { playSound, isMuted, toggleMute } = useSounds();
+
+  // Define the virtual file system
+  const fileSystem: FileSystem = {
+    '/': [
+      { name: 'about', type: 'directory', color: 'text-blue-400' },
+      { name: 'projects', type: 'directory', color: 'text-blue-400' },
+      { name: 'skills', type: 'directory', color: 'text-blue-400' },
+      { name: 'contact', type: 'directory', color: 'text-blue-400' },
+      { name: 'README.md', type: 'file', color: 'text-green-400' },
+    ],
+    '/about': [
+      { name: 'bio.txt', type: 'file', color: 'text-green-400' },
+      { name: 'experience.txt', type: 'file', color: 'text-green-400' },
+      { name: 'education.txt', type: 'file', color: 'text-green-400' },
+    ],
+    '/projects': [
+      { name: 'project-alpha', type: 'directory', color: 'text-blue-400' },
+      { name: 'data-visualizer', type: 'directory', color: 'text-blue-400' },
+      { name: 'mobile-app', type: 'directory', color: 'text-blue-400' },
+    ],
+    '/skills': [
+      { name: 'frontend.txt', type: 'file', color: 'text-green-400' },
+      { name: 'backend.txt', type: 'file', color: 'text-green-400' },
+      { name: 'other.txt', type: 'file', color: 'text-green-400' },
+    ],
+    '/contact': [
+      { name: 'email.txt', type: 'file', color: 'text-green-400' },
+      { name: 'social.txt', type: 'file', color: 'text-green-400' },
+    ],
+    '/projects/project-alpha': [
+      { name: 'description.txt', type: 'file', color: 'text-green-400' },
+      { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
+      { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
+    ],
+    '/projects/data-visualizer': [
+      { name: 'description.txt', type: 'file', color: 'text-green-400' },
+      { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
+      { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
+    ],
+    '/projects/mobile-app': [
+      { name: 'description.txt', type: 'file', color: 'text-green-400' },
+      { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
+      { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
+    ],
+  };
+
+  // Define file contents
+  const fileContents: Record<string, React.ReactNode> = {
+    '/README.md': (
+      <div className="space-y-2">
+        <p className="font-bold terminal-header text-lg">Welcome to my Terminal Portfolio</p>
+        <p>This is an interactive terminal-style portfolio showcasing my skills and projects.</p>
+        <p className="mt-2">Navigate using the following commands:</p>
+        <ul className="list-disc pl-5">
+          <li>Type <span className="terminal-highlight">ls</span> to list files and directories</li>
+          <li>Type <span className="terminal-highlight">cd &lt;directory&gt;</span> to change directories</li>
+          <li>Type <span className="terminal-highlight">cat &lt;file&gt;</span> to view file contents</li>
+          <li>Type <span className="terminal-highlight">help</span> for more commands</li>
+        </ul>
+      </div>
+    ),
+    '/about/bio.txt': (
+      <div>
+        <p className="mb-2">I am a Computer Science student and a passionate Software Developer specializing in modern web applications.</p>
+        <p>My journey in tech started with a fascination for problem-solving and has evolved into building solutions that make a difference.</p>
+      </div>
+    ),
+    '/about/experience.txt': (
+      <div className="space-y-3">
+        <div>
+          <p className="terminal-header font-bold">Senior Developer | Tech Innovations Inc.</p>
+          <p className="text-sm text-gray-400">2022 - Present</p>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Led development of a major web application with 50,000+ monthly users</li>
+            <li>Implemented CI/CD pipelines reducing deployment time by 70%</li>
+            <li>Mentored junior developers and conducted code reviews</li>
+          </ul>
+        </div>
+        <div>
+          <p className="terminal-header font-bold">Full Stack Developer | Digital Solutions LLC</p>
+          <p className="text-sm text-gray-400">2019 - 2022</p>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Developed and maintained multiple client web applications</li>
+            <li>Created RESTful APIs and microservices</li>
+            <li>Optimized database queries increasing performance by 40%</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    '/about/education.txt': (
+      <div>
+        <p className="terminal-header font-bold">Bachelor of Science in Computer Science</p>
+        <p className="text-sm text-gray-400">University of Technology | 2015 - 2019</p>
+        <p className="mt-2">Relevant coursework:</p>
+        <ul className="list-disc pl-5">
+          <li>Data Structures and Algorithms</li>
+          <li>Database Systems</li>
+          <li>Web Development</li>
+          <li>Software Engineering</li>
+        </ul>
+      </div>
+    ),
+    '/skills/frontend.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Frontend Skills</p>
+        <ul className="list-disc pl-5">
+          <li>React.js / Next.js</li>
+          <li>TypeScript</li>
+          <li>Tailwind CSS</li>
+          <li>Framer Motion</li>
+          <li>Redux</li>
+          <li>HTML5/CSS3</li>
+          <li>Responsive Design</li>
+        </ul>
+      </div>
+    ),
+    '/skills/backend.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Backend Skills</p>
+        <ul className="list-disc pl-5">
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>MongoDB</li>
+          <li>PostgreSQL</li>
+          <li>GraphQL</li>
+          <li>REST API Design</li>
+          <li>Authentication/Authorization</li>
+        </ul>
+      </div>
+    ),
+    '/skills/other.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Other Technical Skills</p>
+        <ul className="list-disc pl-5">
+          <li>Git/GitHub</li>
+          <li>Docker</li>
+          <li>AWS</li>
+          <li>CI/CD</li>
+          <li>Testing (Jest, Cypress)</li>
+          <li>Agile Methodologies</li>
+          <li>Technical Writing</li>
+        </ul>
+      </div>
+    ),
+    '/contact/email.txt': (
+      <div className="flex items-center gap-2">
+        <FiMail className="text-lg" />
+        <span>safwan.adnan@example.com</span>
+      </div>
+    ),
+    '/contact/social.txt': (
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <FiGithub className="text-lg" />
+          <a href="https://github.com/safwanadnan" target="_blank" rel="noopener noreferrer" className="terminal-highlight">github.com/safwanadnan</a>
+        </div>
+        <div className="flex items-center gap-2">
+          <FiLinkedin className="text-lg" />
+          <a href="https://linkedin.com/in/safwanadnan" target="_blank" rel="noopener noreferrer" className="terminal-highlight">linkedin.com/in/safwanadnan</a>
+        </div>
+      </div>
+    ),
+    '/projects/project-alpha/description.txt': (
+      <div>
+        <p className="terminal-header font-bold">Project Alpha</p>
+        <p className="mt-2">A full-stack web application with real-time features for collaborative work.</p>
+        <p className="mt-2">This application allows teams to work together on projects in real-time, with features like document editing, task management, and instant messaging.</p>
+      </div>
+    ),
+    '/projects/project-alpha/tech-stack.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Technology Stack:</p>
+        <ul className="list-disc pl-5">
+          <li>React.js (Frontend)</li>
+          <li>Node.js (Backend)</li>
+          <li>Socket.io (Real-time communication)</li>
+          <li>MongoDB (Database)</li>
+          <li>AWS (Hosting)</li>
+        </ul>
+      </div>
+    ),
+    '/projects/project-alpha/demo-link.url': (
+      <div className="flex items-center gap-2">
+        <span>Demo URL:</span> 
+        <a href="https://project-alpha-demo.example.com" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://project-alpha-demo.example.com</a>
+      </div>
+    ),
+    '/projects/data-visualizer/description.txt': (
+      <div>
+        <p className="terminal-header font-bold">Data Visualizer</p>
+        <p className="mt-2">Interactive dashboard for data visualization and analysis.</p>
+        <p className="mt-2">This tool transforms complex data into intuitive visualizations, helping users derive insights and make data-driven decisions.</p>
+      </div>
+    ),
+    '/projects/data-visualizer/tech-stack.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Technology Stack:</p>
+        <ul className="list-disc pl-5">
+          <li>D3.js (Visualizations)</li>
+          <li>React.js (Frontend)</li>
+          <li>Express (Backend)</li>
+          <li>PostgreSQL (Database)</li>
+        </ul>
+      </div>
+    ),
+    '/projects/data-visualizer/demo-link.url': (
+      <div className="flex items-center gap-2">
+        <span>Demo URL:</span> 
+        <a href="https://data-viz-demo.example.com" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://data-viz-demo.example.com</a>
+      </div>
+    ),
+    '/projects/mobile-app/description.txt': (
+      <div>
+        <p className="terminal-header font-bold">Mobile Companion App</p>
+        <p className="mt-2">Cross-platform mobile application for productivity and organization.</p>
+        <p className="mt-2">This app helps users manage their daily tasks, set reminders, and track their progress toward goals.</p>
+      </div>
+    ),
+    '/projects/mobile-app/tech-stack.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Technology Stack:</p>
+        <ul className="list-disc pl-5">
+          <li>React Native (Mobile Framework)</li>
+          <li>Firebase (Backend-as-a-Service)</li>
+          <li>Redux (State Management)</li>
+          <li>Jest (Testing)</li>
+        </ul>
+      </div>
+    ),
+    '/projects/mobile-app/demo-link.url': (
+      <div className="flex items-center gap-2">
+        <span>Demo URL:</span> 
+        <a href="https://mobile-app-demo.example.com" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://mobile-app-demo.example.com</a>
+      </div>
+    )
+  };
 
   const [text] = useTypewriter({
     words: [
@@ -124,6 +373,9 @@ export default function Terminal() {
     if (!cmd.trim()) return;
     
     const commandLower = cmd.toLowerCase().trim();
+    const commandParts = commandLower.split(' ');
+    const mainCommand = commandParts[0];
+    const args = commandParts.slice(1);
     
     // Add command to history if it's not empty and not the same as the last command
     if (cmd.trim() !== '' && 
@@ -139,7 +391,7 @@ export default function Terminal() {
     // Play command execution sound
     playSound('execution');
     
-    switch (commandLower) {
+    switch (mainCommand) {
       case 'help':
         output = (
           <div className="py-2">
@@ -152,6 +404,9 @@ export default function Terminal() {
               <li><span className="terminal-highlight">github</span> - Display my recent GitHub activity</li>
               <li><span className="terminal-highlight">neofetch</span> - Display system information</li>
               <li><span className="terminal-highlight">resume</span> - Download my resume</li>
+              <li><span className="terminal-highlight">ls</span> - List contents of the current directory</li>
+              <li><span className="terminal-highlight">cd</span> - Change directory</li>
+              <li><span className="terminal-highlight">cat</span> - View file contents</li>
               <li><span className="terminal-highlight">sound</span> - Toggle terminal sounds</li>
               <li><span className="terminal-highlight">clear</span> - Clear the terminal</li>
               <li><span className="terminal-highlight">exit</span> - Close the terminal (reloads page)</li>
@@ -316,6 +571,154 @@ export default function Terminal() {
         }, 1000);
         break;
       
+      case 'ls':
+        const path = args.length > 0 ? args[0] : currentDirectory;
+        const normalizedPath = path.startsWith('/') ? path : `${currentDirectory}${currentDirectory === '/' ? '' : '/'}${path}`;
+        
+        if (fileSystem[normalizedPath]) {
+          const items = fileSystem[normalizedPath];
+          output = (
+            <div className="py-2">
+              <div className="terminal-header mb-2">
+                <span className="font-bold">Directory contents of:</span> {normalizedPath}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
+                {items.map((item, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    {item.type === 'directory' ? (
+                      <FiFolder className="text-blue-400" />
+                    ) : (
+                      <FiFile className={item.color || 'text-green-400'} />
+                    )}
+                    <span className={item.color || (item.type === 'directory' ? 'text-blue-400' : 'text-green-400')}>
+                      {item.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        } else {
+          output = (
+            <p className="terminal-error">Directory not found: {normalizedPath}</p>
+          );
+          playSound('error');
+        }
+        break;
+      
+      case 'cd':
+        if (args.length === 0) {
+          // cd without args goes to root
+          setCurrentDirectory('/');
+          output = <p className="terminal-text">Changed directory to: /</p>;
+        } else {
+          const target = args[0];
+          let newPath = '';
+          
+          // Handle special cases
+          if (target === '..') {
+            // Go up one directory
+            if (currentDirectory === '/') {
+              // Already at root
+              output = <p className="terminal-text">Already at root directory.</p>;
+              break;
+            }
+            
+            // Remove the last directory from the path
+            const pathParts = currentDirectory.split('/').filter(Boolean);
+            pathParts.pop();
+            newPath = pathParts.length === 0 ? '/' : '/' + pathParts.join('/');
+          } else if (target === '.') {
+            // Current directory, do nothing
+            newPath = currentDirectory;
+          } else if (target === '~' || target === '/') {
+            // Go to root
+            newPath = '/';
+          } else if (target.startsWith('/')) {
+            // Absolute path
+            newPath = target;
+          } else {
+            // Relative path
+            newPath = `${currentDirectory === '/' ? '' : currentDirectory}/${target}`;
+          }
+          
+          // Normalize path (remove double slashes, etc.)
+          newPath = newPath.replace(/\/+/g, '/');
+          if (!newPath.startsWith('/')) newPath = '/' + newPath;
+          if (newPath !== '/' && newPath.endsWith('/')) newPath = newPath.slice(0, -1);
+          
+          // Check if path exists
+          if (fileSystem[newPath]) {
+            // Check if target is a directory
+            const isDirectory = fileSystem[newPath].some(item => 
+              item.type === 'directory' || item.type === 'file'
+            );
+            
+            if (isDirectory) {
+              setCurrentDirectory(newPath);
+              output = <p className="terminal-text">Changed directory to: {newPath}</p>;
+            } else {
+              output = <p className="terminal-error">Not a directory: {newPath}</p>;
+              playSound('error');
+            }
+          } else {
+            output = <p className="terminal-error">Directory not found: {newPath}</p>;
+            playSound('error');
+          }
+        }
+        break;
+      
+      case 'cat':
+        if (args.length === 0) {
+          output = <p className="terminal-error">Usage: cat &lt;filename&gt;</p>;
+          playSound('error');
+        } else {
+          const filename = args[0];
+          let filePath = '';
+          
+          // Handle absolute or relative path
+          if (filename.startsWith('/')) {
+            filePath = filename;
+          } else {
+            filePath = `${currentDirectory === '/' ? '' : currentDirectory}/${filename}`;
+          }
+          
+          // Normalize path
+          filePath = filePath.replace(/\/+/g, '/');
+          
+          if (fileContents[filePath]) {
+            output = (
+              <div className="py-2 terminal-box">
+                <div className="flex items-center gap-2 mb-2 pb-1 border-b border-green-500/30">
+                  <FiFile className="text-green-400" />
+                  <span className="text-green-400 font-bold">{filePath}</span>
+                </div>
+                <div>{fileContents[filePath]}</div>
+              </div>
+            );
+          } else {
+            // Check if it's a valid path but not a readable file
+            const directory = filePath.substring(0, filePath.lastIndexOf('/')) || '/';
+            const basename = filePath.split('/').pop() || '';
+            
+            if (fileSystem[directory] && fileSystem[directory].find(item => item.name === basename)) {
+              // File exists but might be a directory
+              const item = fileSystem[directory].find(item => item.name === basename);
+              if (item && item.type === 'directory') {
+                output = <p className="terminal-error">{filePath} is a directory, not a file</p>;
+              } else {
+                output = <p className="terminal-error">Cannot read file: {filePath}</p>;
+              }
+            } else {
+              // File doesn't exist
+              output = <p className="terminal-error">File not found: {filePath}</p>;
+            }
+            
+            playSound('error');
+          }
+        }
+        break;
+      
       case 'github':
         output = <GitHubActivity username="safwanadnan" limit={5} />;
         break;
@@ -391,8 +794,15 @@ export default function Terminal() {
         <div className="flex items-center justify-between bg-black px-4 py-2 border-b border-green-500/50">
           <div className="flex items-center gap-2">
             <FiTerminal className="text-green-500" />
-            <h2 className="text-green-500 font-bold">safwan@portfolio:~</h2>
+            <h2 className="text-green-500 font-bold">safwan@portfolio:{currentDirectory}</h2>
           </div>
+          <button 
+            onClick={toggleMute} 
+            className="text-green-500 hover:text-green-400 transition-colors"
+            aria-label={isMuted ? "Unmute terminal sounds" : "Mute terminal sounds"}
+          >
+            {isMuted ? <FiVolumeX size={18} /> : <FiVolume2 size={18} />}
+          </button>
         </div>
         <div 
           ref={terminalRef}

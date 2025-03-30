@@ -15,6 +15,7 @@ A unique, interactive terminal-themed portfolio website showcasing my skills and
 - Terminal sound effects (keystrokes, execution, etc.)
 - GitHub activity integration showing real commit history
 - Neofetch-style system information display
+- File system navigation (ls, cd, cat commands)
 - Downloadable resume
 - Modern terminal-style UI with glowing text effects
 
@@ -29,6 +30,9 @@ The terminal accepts the following commands:
 - `contact` - Get my contact information
 - `github` - Display recent GitHub activity and commits
 - `neofetch` - Show system information in a linux-style display
+- `ls [directory]` - List contents of the specified or current directory
+- `cd [directory]` - Change to the specified directory
+- `cat [file]` - View the contents of a file
 - `resume` - Download my resume as PDF
 - `sound` - Toggle terminal sound effects
 - `clear` - Clear the terminal
@@ -61,6 +65,18 @@ npm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000) to see the portfolio in action.
+
+## 📂 File System Navigation
+
+The portfolio includes a virtual file system that can be navigated using Linux-like commands:
+
+- `ls` - List files and directories in the current location
+- `cd directory_name` - Change to the specified directory
+- `cd ..` - Move up one directory level
+- `cd /` - Return to the root directory
+- `cat filename.txt` - View the contents of a file
+
+This allows visitors to explore your portfolio in a familiar terminal-like experience.
 
 ## 🔊 Sound Effects
 
