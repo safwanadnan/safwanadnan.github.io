@@ -115,7 +115,7 @@ export default function ResumePage() {
               <h2 className="text-xl font-bold mb-2 terminal-header">Contact Information</h2>
               <div className="terminal-box">
                 <ul className="space-y-2">
-                  <li><span className="font-bold">Email:</span> safwan.adnan@example.com</li>
+                  <li><span className="font-bold">Email:</span> safwanadnan19@gmail.com</li>
                   <li><span className="font-bold">GitHub:</span> github.com/safwanadnan</li>
                   <li><span className="font-bold">LinkedIn:</span> linkedin.com/in/safwanadnan</li>
                   <li><span className="font-bold">Location:</span> San Francisco, CA</li>

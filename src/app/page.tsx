@@ -40,7 +40,7 @@ export default function Home() {
               <FiLinkedin size={20} />
             </a>
             <a 
-              href="mailto:safwan.adnan@example.com" 
+              href="mailto:safwanadnan19@gmail.com" 
               className="text-gray-400 hover:text-green-500 transition-colors"
               aria-label="Email"
             >

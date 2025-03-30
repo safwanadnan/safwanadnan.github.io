@@ -1,6 +1,6 @@
 # Terminal Portfolio
 
-A unique, interactive terminal-themed portfolio website showcasing my skills and projects as a developer. This portfolio features a Matrix-style background and a fully functional command-line interface.
+A unique, interactive terminal-themed portfolio website showcasing my skills and projects as a Software Developer and Entrepreneur. This portfolio features a Matrix-style background and a fully functional command-line interface.
 
 ![Terminal Portfolio](https://example.com/terminal-portfolio-screenshot.png)
 
@@ -38,10 +38,38 @@ The terminal accepts the following commands:
 - `clear` - Clear the terminal
 - `exit` - Reload the page
 
+## 🚀 My Projects
+
+### WhatFlow - WhatsApp API Integration
+- Self-hosted WhatsApp API for order confirmations and customer engagement
+- Tech Stack: Node.js, React.js, Shopify App Development
+- Published on Shopify App Store: [WhatFlow](https://apps.shopify.com/whatflow)
+- Official Website: [whatflow.tech](https://whatflow.tech/)
+- Achieved profitability within 2 months of launch
+
+### Dashi Security Suite
+- Comprehensive security solution for Shopify stores developed for a client
+- Features include age verification, anti-theft measures, and fraud prevention
+- Tech Stack: Node.js, React.js, Shopify App Development, Security APIs
+- Published on Shopify App Store: [Dashi Security Suite](https://apps.shopify.com/dashi-security-suite)
+
+### SKNS.PK - Shopify eCommerce
+- Custom Shopify store with integrated payment systems
+- Optimized checkout flow and automated inventory management
+- Customized themes and checkout using HTML, CSS, and Liquid
+- Improved site speed and search engine visibility
+
+### Scrptble
+- Early-stage startup developing innovative web tools
+- Tech Stack: React.js, Node.js, TypeScript, Express, MongoDB
+
 ## 🛠️ Technologies Used
 
-- [Next.js](https://nextjs.org/) - React framework for production
+- [React.js](https://reactjs.org/) - Frontend library
+- [Node.js](https://nodejs.org/) - Backend runtime
 - [TypeScript](https://www.typescriptlang.org/) - Static typing for JavaScript
+- [Shopify](https://shopify.com/) - eCommerce platform
+- [WhatsApp API](https://developers.facebook.com/docs/whatsapp) - Messaging integration
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
 - [React Simple Typewriter](https://www.npmjs.com/package/react-simple-typewriter) - Typewriter effect
@@ -104,7 +132,10 @@ The `neofetch` command displays detailed information about your system:
 
 - GitHub: [@safwanadnan](https://github.com/safwanadnan)
 - LinkedIn: [Safwan Adnan](https://linkedin.com/in/safwanadnan)
-- Email: safwan.adnan@example.com
+- Email: safwanadnan19@gmail.com
+- WhatFlow: [Shopify App Store](https://apps.shopify.com/whatflow) | [Website](https://whatflow.tech/)
+- SKNS.PK: [Website](https://skns.pk)
+- Dashi Security Suite: [Shopify App Store](https://apps.shopify.com/dashi-security-suite)
 
 ---
 

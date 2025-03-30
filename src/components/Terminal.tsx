@@ -57,9 +57,10 @@ export default function Terminal() {
       { name: 'education.txt', type: 'file', color: 'text-green-400' },
     ],
     '/projects': [
-      { name: 'project-alpha', type: 'directory', color: 'text-blue-400' },
-      { name: 'data-visualizer', type: 'directory', color: 'text-blue-400' },
-      { name: 'mobile-app', type: 'directory', color: 'text-blue-400' },
+      { name: 'whatflow', type: 'directory', color: 'text-blue-400' },
+      { name: 'skns-pk', type: 'directory', color: 'text-blue-400' },
+      { name: 'scrptble', type: 'directory', color: 'text-blue-400' },
+      { name: 'dashi-security', type: 'directory', color: 'text-blue-400' },
     ],
     '/skills': [
       { name: 'frontend.txt', type: 'file', color: 'text-green-400' },
@@ -70,17 +71,23 @@ export default function Terminal() {
       { name: 'email.txt', type: 'file', color: 'text-green-400' },
       { name: 'social.txt', type: 'file', color: 'text-green-400' },
     ],
-    '/projects/project-alpha': [
+    '/projects/whatflow': [
+      { name: 'description.txt', type: 'file', color: 'text-green-400' },
+      { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
+      { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
+      { name: 'website.url', type: 'file', color: 'text-yellow-400' },
+    ],
+    '/projects/skns-pk': [
       { name: 'description.txt', type: 'file', color: 'text-green-400' },
       { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
       { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
     ],
-    '/projects/data-visualizer': [
+    '/projects/scrptble': [
       { name: 'description.txt', type: 'file', color: 'text-green-400' },
       { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
       { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
     ],
-    '/projects/mobile-app': [
+    '/projects/dashi-security': [
       { name: 'description.txt', type: 'file', color: 'text-green-400' },
       { name: 'tech-stack.txt', type: 'file', color: 'text-green-400' },
       { name: 'demo-link.url', type: 'file', color: 'text-yellow-400' },
@@ -104,28 +111,59 @@ export default function Terminal() {
     ),
     '/about/bio.txt': (
       <div>
-        <p className="mb-2">I am a Computer Science student and a passionate Software Developer specializing in modern web applications.</p>
-        <p>My journey in tech started with a fascination for problem-solving and has evolved into building solutions that make a difference.</p>
+        <p className="mb-2">I am a Software Developer and Entrepreneur specializing in web applications, eCommerce solutions, and API development.</p>
+        <p>My journey in tech combines entrepreneurial spirit with technical expertise, building innovative solutions like self-hosted WhatsApp APIs and optimized Shopify stores.</p>
       </div>
     ),
     '/about/experience.txt': (
       <div className="space-y-3">
         <div>
-          <p className="terminal-header font-bold">Senior Developer | Tech Innovations Inc.</p>
-          <p className="text-sm text-gray-400">2022 - Present</p>
+          <p className="terminal-header font-bold">Co-Founder and CEO | Scrptble</p>
+          <p className="text-sm text-gray-400">Dec 2024 - Present · 4 months</p>
           <ul className="list-disc pl-5 mt-1">
-            <li>Led development of a major web application with 50,000+ monthly users</li>
-            <li>Implemented CI/CD pipelines reducing deployment time by 70%</li>
-            <li>Mentored junior developers and conducted code reviews</li>
+            <li>Leading development and business operations for early-stage startup</li>
           </ul>
         </div>
         <div>
-          <p className="terminal-header font-bold">Full Stack Developer | Digital Solutions LLC</p>
-          <p className="text-sm text-gray-400">2019 - 2022</p>
+          <p className="terminal-header font-bold">Co-Founder and CTO | SKNS.PK</p>
+          <p className="text-sm text-gray-400">Dec 2024 - Present · 4 months</p>
           <ul className="list-disc pl-5 mt-1">
-            <li>Developed and maintained multiple client web applications</li>
-            <li>Created RESTful APIs and microservices</li>
-            <li>Optimized database queries increasing performance by 40%</li>
+            <li>Designed and optimized a user-friendly Shopify eCommerce store</li>
+            <li>Integrated payment gateways, apps, and shipping solutions</li>
+            <li>Customized themes and checkout using HTML, CSS, and Liquid</li>
+            <li>Improved site speed and search engine visibility</li>
+            <li>Streamlined inventory, order fulfillment, and customer communications</li>
+          </ul>
+        </div>
+        <div>
+          <p className="terminal-header font-bold">Co-Founder and CEO | WhatFlow</p>
+          <p className="text-sm text-gray-400">Aug 2024 - Present · 8 months</p>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Set up completely self-hosted unofficial WhatsApp API</li>
+            <li>Developed Full-Stack Application with Node.js and React</li>
+            <li>Achieved profitability within 2 months of launch</li>
+            <li>Crossed 100 user mark in less than 2 months</li>
+            <li>Published app on the Shopify App Store</li>
+          </ul>
+        </div>
+        <div>
+          <p className="terminal-header font-bold">IT Specialist | AI Scout</p>
+          <p className="text-sm text-gray-400">May 2023 - Nov 2023 · 7 months</p>
+          <p className="text-sm text-gray-400">Vancouver, British Columbia, Canada · Remote</p>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Supported AI-based software development</li>
+            <li>Debugged Python applications and WordPress implementations</li>
+            <li>Created comprehensive technical documentation</li>
+          </ul>
+        </div>
+        <div>
+          <p className="terminal-header font-bold">Resident Intern | Valider</p>
+          <p className="text-sm text-gray-400">Jan 2023 - Jun 2023 · 6 months</p>
+          <p className="text-sm text-gray-400">Karāchi, Sindh, Pakistan · Hybrid</p>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Worked on data science and analytics projects</li>
+            <li>Supported software development using Python</li>
+            <li>Conducted data analysis and assisted with AI development</li>
           </ul>
         </div>
       </div>
@@ -133,7 +171,7 @@ export default function Terminal() {
     '/about/education.txt': (
       <div>
         <p className="terminal-header font-bold">Bachelor of Science in Computer Science</p>
-        <p className="text-sm text-gray-400">University of Technology | 2015 - 2019</p>
+        <p className="text-sm text-gray-400">University of Technology | 2019 - 2023</p>
         <p className="mt-2">Relevant coursework:</p>
         <ul className="list-disc pl-5">
           <li>Data Structures and Algorithms</li>
@@ -147,13 +185,14 @@ export default function Terminal() {
       <div>
         <p className="terminal-header font-bold mb-2">Frontend Skills</p>
         <ul className="list-disc pl-5">
-          <li>React.js / Next.js</li>
+          <li>React.js</li>
           <li>TypeScript</li>
-          <li>Tailwind CSS</li>
-          <li>Framer Motion</li>
-          <li>Redux</li>
           <li>HTML5/CSS3</li>
-          <li>Responsive Design</li>
+          <li>Front-End Design</li>
+          <li>Responsive Web Design</li>
+          <li>Shopify Polaris</li>
+          <li>Shopify Theme Customization</li>
+          <li>Liquid Template Language</li>
         </ul>
       </div>
     ),
@@ -162,12 +201,13 @@ export default function Terminal() {
         <p className="terminal-header font-bold mb-2">Backend Skills</p>
         <ul className="list-disc pl-5">
           <li>Node.js</li>
+          <li>REST APIs</li>
+          <li>API Development</li>
+          <li>API Testing</li>
           <li>Express</li>
-          <li>MongoDB</li>
-          <li>PostgreSQL</li>
-          <li>GraphQL</li>
-          <li>REST API Design</li>
-          <li>Authentication/Authorization</li>
+          <li>Python</li>
+          <li>Automation</li>
+          <li>Debugging</li>
         </ul>
       </div>
     ),
@@ -175,20 +215,24 @@ export default function Terminal() {
       <div>
         <p className="terminal-header font-bold mb-2">Other Technical Skills</p>
         <ul className="list-disc pl-5">
-          <li>Git/GitHub</li>
-          <li>Docker</li>
-          <li>AWS</li>
-          <li>CI/CD</li>
-          <li>Testing (Jest, Cypress)</li>
-          <li>Agile Methodologies</li>
-          <li>Technical Writing</li>
+          <li>Shopify eCommerce</li>
+          <li>Full-Stack Development</li>
+          <li>Artificial Intelligence</li>
+          <li>Problem Solving</li>
+          <li>IT Operations</li>
+          <li>Data Science</li>
+          <li>Data Analytics</li>
+          <li>Technical Documentation</li>
+          <li>WordPress</li>
+          <li>Postman API</li>
+          <li>Scalable Web Applications</li>
         </ul>
       </div>
     ),
     '/contact/email.txt': (
       <div className="flex items-center gap-2">
         <FiMail className="text-lg" />
-        <span>safwan.adnan@example.com</span>
+        <span>safwanadnan19@gmail.com</span>
       </div>
     ),
     '/contact/social.txt': (
@@ -201,79 +245,129 @@ export default function Terminal() {
           <FiLinkedin className="text-lg" />
           <a href="https://linkedin.com/in/safwanadnan" target="_blank" rel="noopener noreferrer" className="terminal-highlight">linkedin.com/in/safwanadnan</a>
         </div>
+        <div className="flex items-center gap-2">
+          <FiInfo className="text-lg" />
+          <span>WhatFlow: </span>
+          <a href="https://apps.shopify.com/whatflow" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Shopify App</a>
+          <span> | </span>
+          <a href="https://whatflow.tech/" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Website</a>
+        </div>
+        <div className="flex items-center gap-2">
+          <FiInfo className="text-lg" />
+          <span>Dashi Security Suite: </span>
+          <a href="https://apps.shopify.com/dashi-security-suite" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Shopify App</a>
+        </div>
+        <div className="flex items-center gap-2">
+          <FiInfo className="text-lg" />
+          <span>SKNS.PK: </span>
+          <a href="https://skns.pk" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Website</a>
+        </div>
       </div>
     ),
-    '/projects/project-alpha/description.txt': (
+    '/projects/whatflow/description.txt': (
       <div>
-        <p className="terminal-header font-bold">Project Alpha</p>
-        <p className="mt-2">A full-stack web application with real-time features for collaborative work.</p>
-        <p className="mt-2">This application allows teams to work together on projects in real-time, with features like document editing, task management, and instant messaging.</p>
+        <p className="terminal-header font-bold">WhatFlow</p>
+        <p className="mt-2">Self-hosted WhatsApp API for order confirmations and customer engagement.</p>
+        <p className="mt-2">This application allows businesses to automatically send order confirmations and updates via WhatsApp, improving customer engagement and reducing support inquiries.</p>
+        <p className="mt-2">Published on the Shopify App Store and established a dedicated website for the product.</p>
       </div>
     ),
-    '/projects/project-alpha/tech-stack.txt': (
+    '/projects/whatflow/tech-stack.txt': (
       <div>
         <p className="terminal-header font-bold mb-2">Technology Stack:</p>
         <ul className="list-disc pl-5">
-          <li>React.js (Frontend)</li>
           <li>Node.js (Backend)</li>
-          <li>Socket.io (Real-time communication)</li>
-          <li>MongoDB (Database)</li>
-          <li>AWS (Hosting)</li>
-        </ul>
-      </div>
-    ),
-    '/projects/project-alpha/demo-link.url': (
-      <div className="flex items-center gap-2">
-        <span>Demo URL:</span> 
-        <a href="https://project-alpha-demo.example.com" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://project-alpha-demo.example.com</a>
-      </div>
-    ),
-    '/projects/data-visualizer/description.txt': (
-      <div>
-        <p className="terminal-header font-bold">Data Visualizer</p>
-        <p className="mt-2">Interactive dashboard for data visualization and analysis.</p>
-        <p className="mt-2">This tool transforms complex data into intuitive visualizations, helping users derive insights and make data-driven decisions.</p>
-      </div>
-    ),
-    '/projects/data-visualizer/tech-stack.txt': (
-      <div>
-        <p className="terminal-header font-bold mb-2">Technology Stack:</p>
-        <ul className="list-disc pl-5">
-          <li>D3.js (Visualizations)</li>
           <li>React.js (Frontend)</li>
-          <li>Express (Backend)</li>
-          <li>PostgreSQL (Database)</li>
+          <li>WhatsApp API Integration</li>
+          <li>Shopify App Development</li>
+          <li>Shopify Polaris Components</li>
         </ul>
       </div>
     ),
-    '/projects/data-visualizer/demo-link.url': (
+    '/projects/whatflow/demo-link.url': (
       <div className="flex items-center gap-2">
-        <span>Demo URL:</span> 
-        <a href="https://data-viz-demo.example.com" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://data-viz-demo.example.com</a>
+        <span>Shopify App Store:</span> 
+        <a href="https://apps.shopify.com/whatflow" target="_blank" rel="noopener noreferrer" className="terminal-highlight">WhatFlow - Automate Order Confirmations via WhatsApp</a>
       </div>
     ),
-    '/projects/mobile-app/description.txt': (
+    '/projects/whatflow/website.url': (
+      <div className="flex items-center gap-2">
+        <span>Official Website:</span> 
+        <a href="https://whatflow.tech/" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://whatflow.tech/</a>
+      </div>
+    ),
+    '/projects/skns-pk/description.txt': (
       <div>
-        <p className="terminal-header font-bold">Mobile Companion App</p>
-        <p className="mt-2">Cross-platform mobile application for productivity and organization.</p>
-        <p className="mt-2">This app helps users manage their daily tasks, set reminders, and track their progress toward goals.</p>
+        <p className="terminal-header font-bold">SKNS.PK</p>
+        <p className="mt-2">Custom Shopify eCommerce store with optimized customer experience.</p>
+        <p className="mt-2">A fully customized Shopify store with integrated payment systems, optimized checkout flow, and automated inventory management.</p>
       </div>
     ),
-    '/projects/mobile-app/tech-stack.txt': (
+    '/projects/skns-pk/tech-stack.txt': (
       <div>
         <p className="terminal-header font-bold mb-2">Technology Stack:</p>
         <ul className="list-disc pl-5">
-          <li>React Native (Mobile Framework)</li>
-          <li>Firebase (Backend-as-a-Service)</li>
-          <li>Redux (State Management)</li>
-          <li>Jest (Testing)</li>
+          <li>Shopify</li>
+          <li>HTML/CSS</li>
+          <li>Liquid Template Language</li>
+          <li>JavaScript</li>
+          <li>Payment Gateway APIs</li>
         </ul>
       </div>
     ),
-    '/projects/mobile-app/demo-link.url': (
+    '/projects/skns-pk/demo-link.url': (
       <div className="flex items-center gap-2">
-        <span>Demo URL:</span> 
-        <a href="https://mobile-app-demo.example.com" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://mobile-app-demo.example.com</a>
+        <span>Website:</span> 
+        <a href="https://skns.pk" target="_blank" rel="noopener noreferrer" className="terminal-highlight">https://skns.pk</a>
+      </div>
+    ),
+    '/projects/scrptble/description.txt': (
+      <div>
+        <p className="terminal-header font-bold">Scrptble</p>
+        <p className="mt-2">Startup focused on developing innovative web tools.</p>
+        <p className="mt-2">Currently in early development stages, building out the next generation of web-based productivity tools.</p>
+      </div>
+    ),
+    '/projects/scrptble/tech-stack.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Technology Stack:</p>
+        <ul className="list-disc pl-5">
+          <li>React.js</li>
+          <li>Node.js</li>
+          <li>TypeScript</li>
+          <li>Express</li>
+          <li>MongoDB</li>
+        </ul>
+      </div>
+    ),
+    '/projects/scrptble/demo-link.url': (
+      <div className="flex items-center gap-2">
+        <span>Coming Soon</span>
+      </div>
+    ),
+    '/projects/dashi-security/description.txt': (
+      <div>
+        <p className="terminal-header font-bold">Dashi Security Suite</p>
+        <p className="mt-2">Comprehensive security solution for Shopify stores developed for a client.</p>
+        <p className="mt-2">Features include age verification, anti-theft measures, and fraud prevention to protect stores and enhance customer experience.</p>
+      </div>
+    ),
+    '/projects/dashi-security/tech-stack.txt': (
+      <div>
+        <p className="terminal-header font-bold mb-2">Technology Stack:</p>
+        <ul className="list-disc pl-5">
+          <li>Node.js (Backend)</li>
+          <li>React.js (Frontend)</li>
+          <li>Shopify App Development</li>
+          <li>Security & Fraud Prevention APIs</li>
+          <li>Age Verification Systems</li>
+        </ul>
+      </div>
+    ),
+    '/projects/dashi-security/demo-link.url': (
+      <div className="flex items-center gap-2">
+        <span>Shopify App Store:</span> 
+        <a href="https://apps.shopify.com/dashi-security-suite" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Dashi Security Suite - Age Verification, Anti-Theft & Fraud Blocker</a>
       </div>
     )
   };
@@ -281,8 +375,8 @@ export default function Terminal() {
   const [text] = useTypewriter({
     words: [
       'Hello, World! I am Safwan Adnan.',
-      'Computer Science Student.',
-      'Software Developer.',
+      'Software Developer & Entrepreneur.',
+      'Shopify Expert & API Developer.',
       'Type "help" to get started...',
     ],
     loop: 1,
@@ -420,12 +514,13 @@ export default function Terminal() {
           <div className="py-2">
             <h3 className="terminal-header font-bold text-lg">About Me</h3>
             <p className="my-2">
-              I am a Computer Science student and a passionate Software Developer. 
-              I specialize in creating modern web applications with clean and efficient code.
+              I am a Software Developer and Entrepreneur specializing in web applications, 
+              eCommerce solutions, and API development.
             </p>
             <p>
-              My journey in tech started with a fascination for problem-solving and has evolved 
-              into building solutions that make a difference.
+              I've co-founded multiple startups including WhatFlow (a WhatsApp API solution) 
+              and SKNS.PK (a Shopify eCommerce store). I combine technical expertise with 
+              business acumen to create profitable digital products.
             </p>
           </div>
         );
@@ -440,27 +535,42 @@ export default function Terminal() {
                 <p className="font-bold">Frontend</p>
                 <ul className="pl-4 list-disc">
                   <li>React.js</li>
-                  <li>Next.js</li>
                   <li>TypeScript</li>
-                  <li>Tailwind CSS</li>
+                  <li>HTML5/CSS3</li>
+                  <li>Front-End Design</li>
+                  <li>Responsive Web Design</li>
+                  <li>Shopify Polaris</li>
+                  <li>Shopify Theme Customization</li>
+                  <li>Liquid Template Language</li>
                 </ul>
               </div>
               <div className="terminal-box">
                 <p className="font-bold">Backend</p>
                 <ul className="pl-4 list-disc">
                   <li>Node.js</li>
+                  <li>REST APIs</li>
+                  <li>API Development</li>
+                  <li>API Testing</li>
                   <li>Express</li>
-                  <li>MongoDB</li>
-                  <li>PostgreSQL</li>
+                  <li>Python</li>
+                  <li>Automation</li>
+                  <li>Debugging</li>
                 </ul>
               </div>
               <div className="terminal-box">
                 <p className="font-bold">Other</p>
                 <ul className="pl-4 list-disc">
-                  <li>Git/GitHub</li>
-                  <li>Docker</li>
-                  <li>AWS</li>
-                  <li>CI/CD</li>
+                  <li>Shopify eCommerce</li>
+                  <li>Full-Stack Development</li>
+                  <li>Artificial Intelligence</li>
+                  <li>Problem Solving</li>
+                  <li>IT Operations</li>
+                  <li>Data Science</li>
+                  <li>Data Analytics</li>
+                  <li>Technical Documentation</li>
+                  <li>WordPress</li>
+                  <li>Postman API</li>
+                  <li>Scalable Web Applications</li>
                 </ul>
               </div>
             </div>
@@ -474,22 +584,37 @@ export default function Terminal() {
             <h3 className="terminal-header font-bold text-lg">Projects</h3>
             <div className="space-y-4 mt-2">
               <div className="terminal-box">
-                <h4 className="font-bold">Project Alpha</h4>
-                <p className="text-sm opacity-80">A full-stack web application with real-time features</p>
-                <p className="mt-1">Technologies: React, Node.js, Socket.io, MongoDB</p>
-                <p className="mt-1 terminal-highlight cursor-pointer">github.com/safwanadnan/project-alpha</p>
+                <h4 className="font-bold">WhatFlow</h4>
+                <p className="text-sm opacity-80">Self-hosted WhatsApp API and full stack Shopify automation app for order confirmations and customer engagement.</p>
+                <p className="mt-1">Technologies: Node.js, React.js, WhatsApp API Integration, Shopify App Development</p>
+                <div className="mt-1">
+                  <p className="terminal-highlight">
+                    <a href="https://apps.shopify.com/whatflow" target="_blank" rel="noopener noreferrer">Shopify App: WhatFlow</a>
+                  </p>
+                  <p className="terminal-highlight">
+                    <a href="https://whatflow.tech/" target="_blank" rel="noopener noreferrer">Website: https://whatflow.tech/</a>
+                  </p>
+                </div>
               </div>
               <div className="terminal-box">
-                <h4 className="font-bold">Data Visualizer</h4>
-                <p className="text-sm opacity-80">Interactive dashboard for data visualization</p>
-                <p className="mt-1">Technologies: D3.js, React, Express, PostgreSQL</p>
-                <p className="mt-1 terminal-highlight cursor-pointer">github.com/safwanadnan/data-viz</p>
+                <h4 className="font-bold">Dashi Security Suite</h4>
+                <p className="text-sm opacity-80">Comprehensive security solution for Shopify stores with age verification, anti-theft and fraud prevention.</p>
+                <p className="mt-1">Technologies: Node.js, Remix, TypeScript, Shopify App Development, Security APIs</p>
+                <p className="mt-1 terminal-highlight">
+                  <a href="https://apps.shopify.com/dashi-security-suite" target="_blank" rel="noopener noreferrer">Shopify App: Dashi Security Suite</a>
+                </p>
               </div>
               <div className="terminal-box">
-                <h4 className="font-bold">Mobile Companion App</h4>
-                <p className="text-sm opacity-80">Cross-platform mobile application</p>
-                <p className="mt-1">Technologies: React Native, Firebase, Redux</p>
-                <p className="mt-1 terminal-highlight cursor-pointer">github.com/safwanadnan/mobile-app</p>
+                <h4 className="font-bold">SKNS.PK</h4>
+                <p className="text-sm opacity-80">Custom Shopify eCommerce store with optimized customer experience.</p>
+                <p className="mt-1">Technologies: Shopify, HTML/CSS, Liquid Template Language, JavaScript, Payment Gateway APIs</p>
+                <p className="mt-1 terminal-highlight cursor-pointer">Website: https://skns.pk</p>
+              </div>
+              <div className="terminal-box">
+                <h4 className="font-bold">Scrptble</h4>
+                <p className="text-sm opacity-80">Startup focused on developing innovative web tools.</p>
+                <p className="mt-1">Technologies: React.js, Node.js, TypeScript, Express, MongoDB</p>
+                <p className="mt-1 terminal-highlight cursor-pointer">Coming Soon</p>
               </div>
             </div>
           </div>
@@ -503,7 +628,7 @@ export default function Terminal() {
             <div className="flex flex-col space-y-2 mt-2">
               <div className="flex items-center gap-2">
                 <FiMail className="text-lg" />
-                <span>safwan.adnan@example.com</span>
+                <span>safwanadnan19@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <FiGithub className="text-lg" />
@@ -512,6 +637,24 @@ export default function Terminal() {
               <div className="flex items-center gap-2">
                 <FiLinkedin className="text-lg" />
                 <a href="https://linkedin.com/in/safwanadnan" target="_blank" rel="noopener noreferrer" className="terminal-highlight">linkedin.com/in/safwanadnan</a>
+              </div>
+              <div className="flex items-center gap-2 mt-3">
+                <FiInfo className="text-lg" />
+                <span className="text-gray-400">Projects:</span>
+              </div>
+              <div className="flex items-center gap-2 pl-6">
+                <span>WhatFlow:</span>
+                <a href="https://apps.shopify.com/whatflow" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Shopify App</a>
+                <span>|</span>
+                <a href="https://whatflow.tech/" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Website</a>
+              </div>
+              <div className="flex items-center gap-2 pl-6">
+                <span>Dashi Security Suite:</span>
+                <a href="https://apps.shopify.com/dashi-security-suite" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Shopify App</a>
+              </div>
+              <div className="flex items-center gap-2 pl-6">
+                <span>SKNS.PK:</span>
+                <a href="https://skns.pk" target="_blank" rel="noopener noreferrer" className="terminal-highlight">Website</a>
               </div>
             </div>
           </div>
