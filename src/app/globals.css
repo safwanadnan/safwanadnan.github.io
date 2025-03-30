@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset any default input styling */
+input {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
 :root {
   --foreground-rgb: 0, 255, 0;
   --background-start-rgb: 0, 0, 0;
@@ -59,11 +69,16 @@ body {
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
   }
   
-  .typing-cursor {
+  /* Terminal cursor styles */
+  .terminal-cursor {
     display: inline-block;
-    width: 10px;
-    height: 1.2em;
+    width: 8px;
+    height: 18px;
     background-color: var(--terminal-green);
+    box-shadow: 0 0 4px rgba(0, 255, 0, 0.7);
+    margin-left: 1px;
+    position: relative;
+    top: 1px;
     animation: blink 1s step-end infinite;
   }
   
@@ -87,5 +102,61 @@ body {
     62%, 64%, 98% {
       transform: translate(0, 0) skew(5deg);
     }
+  }
+  
+  /* Hide terminal input completely */
+  .terminal-input {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    caret-color: transparent;
+    color: transparent;
+    pointer-events: auto;
+    z-index: -1;
+  }
+  
+  /* Add a keyboard-focus style that doesn't show outlines */
+  .terminal-input:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  
+  /* Disable default input styling */
+  input[type="text"] {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  /* Terminal container should respond to clicks */
+  .terminal-container {
+    cursor: text;
+  }
+  
+  /* Terminal command line styling */
+  .command-line {
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  
+  .command-prompt {
+    color: var(--terminal-green);
+    margin-right: 8px;
+    display: inline-block;
+    user-select: none;
+  }
+  
+  .command-text {
+    color: var(--terminal-green);
+    white-space: pre;
+    display: inline;
   }
 }

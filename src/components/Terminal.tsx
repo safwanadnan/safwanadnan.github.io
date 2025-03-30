@@ -13,7 +13,9 @@ export default function Terminal() {
   const [commands, setCommands] = useState<Command[]>([]);
   const [input, setInput] = useState('');
   const [showHelp, setShowHelp] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [text] = useTypewriter({
     words: [
@@ -26,6 +28,30 @@ export default function Terminal() {
     typeSpeed: 70,
     deleteSpeed: 40,
   });
+
+  // Blink cursor
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible(prev => !prev);
+    }, 600);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  // Focus input when clicking anywhere in terminal
+  useEffect(() => {
+    const handleClick = () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    };
+    
+    document.addEventListener('click', handleClick);
+    
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -210,7 +236,8 @@ export default function Terminal() {
         
         <div 
           ref={terminalRef}
-          className="bg-black p-4 h-[70vh] overflow-y-auto font-mono text-sm md:text-base"
+          onClick={() => inputRef.current?.focus()}
+          className="bg-black p-4 h-[70vh] overflow-y-auto font-mono text-sm md:text-base cursor-text terminal-container"
         >
           {/* Welcome message */}
           <motion.div
@@ -237,25 +264,35 @@ export default function Terminal() {
           {/* Previous commands */}
           {commands.map((cmd, index) => (
             <div key={index} className="mb-2">
-              <div className="flex items-center text-green-500">
-                <span className="mr-2">$</span>
-                <span>{cmd.input}</span>
+              <div className="command-line">
+                <span className="command-prompt">$</span>
+                <span className="command-text">{cmd.input}</span>
               </div>
               {cmd.output && <div className="pl-4 mt-1">{cmd.output}</div>}
             </div>
           ))}
           
-          {/* Current input */}
-          <div className="flex items-center text-green-500">
-            <span className="mr-2">$</span>
-            <input
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              className="flex-grow bg-transparent outline-none border-none text-green-500"
-              autoFocus
-            />
+          {/* Current input with terminal-style cursor */}
+          <div className="command-line">
+            <span className="command-prompt">$</span>
+            <div className="flex items-center">
+              <div className="relative inline-flex items-center">
+                <span className="command-text">{input}</span>
+                <span 
+                  className={`terminal-cursor ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}
+                ></span>
+              </div>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                className="terminal-input"
+                autoFocus
+                aria-label="Terminal input"
+              />
+            </div>
           </div>
         </div>
       </div>
