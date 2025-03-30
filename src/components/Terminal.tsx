@@ -9,11 +9,16 @@ type Command = {
   output: React.ReactNode;
 };
 
+// Available commands for tab completion
+const AVAILABLE_COMMANDS = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'exit'];
+
 export default function Terminal() {
   const [commands, setCommands] = useState<Command[]>([]);
   const [input, setInput] = useState('');
   const [showHelp, setShowHelp] = useState(false);
   const [cursorVisible, setCursorVisible] = useState(true);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -61,10 +66,50 @@ export default function Terminal() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
+    // Reset history index when typing
+    setHistoryIndex(-1);
+  };
+
+  // Handle tab completion
+  const handleTabCompletion = () => {
+    if (input.trim() === '') return;
+    
+    const matchingCommands = AVAILABLE_COMMANDS.filter(cmd => 
+      cmd.startsWith(input.toLowerCase().trim())
+    );
+    
+    if (matchingCommands.length === 1) {
+      // If exactly one match, complete the command
+      setInput(matchingCommands[0]);
+    } else if (matchingCommands.length > 1) {
+      // If multiple matches, show suggestions
+      const output = (
+        <div className="py-1">
+          <p className="terminal-text">Tab completion options:</p>
+          <div className="pl-4 flex flex-wrap gap-x-4">
+            {matchingCommands.map((cmd, index) => (
+              <span key={index} className="terminal-highlight">{cmd}</span>
+            ))}
+          </div>
+        </div>
+      );
+      setCommands([...commands, { input: input, output }]);
+    }
   };
 
   const processCommand = (cmd: string) => {
+    if (!cmd.trim()) return;
+    
     const commandLower = cmd.toLowerCase().trim();
+    
+    // Add command to history if it's not empty and not the same as the last command
+    if (cmd.trim() !== '' && 
+        (commandHistory.length === 0 || commandHistory[0] !== cmd)) {
+      setCommandHistory([cmd, ...commandHistory]);
+    }
+    
+    // Reset history index
+    setHistoryIndex(-1);
     
     let output: React.ReactNode;
     
@@ -218,6 +263,36 @@ export default function Terminal() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       processCommand(input);
+    } 
+    else if (e.key === 'Tab') {
+      e.preventDefault(); // Prevent focus change
+      handleTabCompletion();
+    }
+    else if (e.key === 'ArrowUp') {
+      e.preventDefault(); // Prevent cursor from moving to start
+      
+      // Navigate up through command history
+      if (commandHistory.length > 0) {
+        // If we're not already navigating, start at the beginning
+        const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : historyIndex;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[newIndex]);
+      }
+    }
+    else if (e.key === 'ArrowDown') {
+      e.preventDefault(); // Prevent cursor from moving to end
+      
+      // Navigate down through command history
+      if (historyIndex > 0) {
+        // Move one step down in history
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[newIndex]);
+      } else if (historyIndex === 0) {
+        // If at the most recent command, clear input
+        setHistoryIndex(-1);
+        setInput('');
+      }
     }
   };
 
@@ -259,6 +334,7 @@ export default function Terminal() {
             </pre>
             <p className="text-green-400 mt-2">{text}<Cursor cursorStyle="_" /></p>
             <p className="text-gray-400 mt-1 text-xs">Type 'help' to see available commands.</p>
+            <p className="text-gray-400 text-xs">Use UP/DOWN arrows to navigate command history and TAB for autocompletion.</p>
           </motion.div>
           
           {/* Previous commands */}
