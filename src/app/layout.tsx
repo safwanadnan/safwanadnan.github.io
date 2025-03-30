@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Terminal Portfolio | Safwan Adnan",
+  title: "Safwan Adnan | Portfolio",
   description: "A terminal-themed portfolio showcasing my technical and design skills",
 };
 
