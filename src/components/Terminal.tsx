@@ -2,8 +2,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { motion } from 'framer-motion';
-import { FiTerminal, FiGithub, FiLinkedin, FiMail, FiDownload, FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { FiTerminal, FiGithub, FiLinkedin, FiMail, FiDownload, FiVolume2, FiVolumeX, FiInfo } from 'react-icons/fi';
 import { useSounds } from './SoundManager';
+import GitHubActivity from './GitHubActivity';
+import NeofetchDisplay from './NeofetchDisplay';
 
 type Command = {
   input: string;
@@ -11,7 +13,10 @@ type Command = {
 };
 
 // Available commands for tab completion
-const AVAILABLE_COMMANDS = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'exit', 'resume', 'sound'];
+const AVAILABLE_COMMANDS = [
+  'help', 'about', 'skills', 'projects', 'contact', 'clear', 'exit', 
+  'resume', 'sound', 'github', 'neofetch'
+];
 
 export default function Terminal() {
   const [commands, setCommands] = useState<Command[]>([]);
@@ -144,6 +149,8 @@ export default function Terminal() {
               <li><span className="terminal-highlight">skills</span> - View my technical skills</li>
               <li><span className="terminal-highlight">projects</span> - Check out my projects</li>
               <li><span className="terminal-highlight">contact</span> - Get my contact information</li>
+              <li><span className="terminal-highlight">github</span> - Display my recent GitHub activity</li>
+              <li><span className="terminal-highlight">neofetch</span> - Display system information</li>
               <li><span className="terminal-highlight">resume</span> - Download my resume</li>
               <li><span className="terminal-highlight">sound</span> - Toggle terminal sounds</li>
               <li><span className="terminal-highlight">clear</span> - Clear the terminal</li>
@@ -307,6 +314,14 @@ export default function Terminal() {
         setTimeout(() => {
           window.location.reload();
         }, 1000);
+        break;
+      
+      case 'github':
+        output = <GitHubActivity username="safwanadnan" limit={5} />;
+        break;
+      
+      case 'neofetch':
+        output = <NeofetchDisplay />;
         break;
       
       case '':

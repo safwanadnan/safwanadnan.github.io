@@ -13,6 +13,8 @@ A unique, interactive terminal-themed portfolio website showcasing my skills and
 - Command history navigation (up/down arrows)
 - Tab completion for commands
 - Terminal sound effects (keystrokes, execution, etc.)
+- GitHub activity integration showing real commit history
+- Neofetch-style system information display
 - Downloadable resume
 - Modern terminal-style UI with glowing text effects
 
@@ -25,6 +27,8 @@ The terminal accepts the following commands:
 - `skills` - View my technical skills
 - `projects` - Check out my projects
 - `contact` - Get my contact information
+- `github` - Display recent GitHub activity and commits
+- `neofetch` - Show system information in a linux-style display
 - `resume` - Download my resume as PDF
 - `sound` - Toggle terminal sound effects
 - `clear` - Clear the terminal
@@ -38,6 +42,7 @@ The terminal accepts the following commands:
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
 - [React Simple Typewriter](https://www.npmjs.com/package/react-simple-typewriter) - Typewriter effect
 - [React Icons](https://react-icons.github.io/react-icons/) - Icon library
+- [GitHub API](https://docs.github.com/en/rest) - For fetching commit history
 
 ## 🔧 Setup and Development
 
@@ -66,6 +71,18 @@ The terminal includes sound effects for an immersive experience:
 - Success sounds
 
 You can toggle sounds on/off using the sound button in the terminal header or the `sound` command.
+
+## 💻 System Detection
+
+The `neofetch` command displays detailed information about your system:
+- Operating system with ASCII art logo
+- Browser and version
+- Screen resolution and color depth
+- CPU threads
+- Memory usage (when available)
+- Language and timezone
+- Device type and dark mode status
+- Session uptime
 
 ## 📬 Contact
 
