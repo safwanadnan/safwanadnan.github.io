@@ -9,7 +9,6 @@ export default function Home() {
       <MatrixBackground />
       
       <div className="w-full max-w-5xl flex flex-col items-center justify-center py-8 md:py-12">
-        <h1 className="sr-only">Safwan Adnan - Terminal Portfolio</h1>
         
         <div className="w-full mb-8">
           <Terminal />

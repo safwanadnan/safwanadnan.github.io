@@ -10,7 +10,10 @@ A unique, interactive terminal-themed portfolio website showcasing my skills and
 - Matrix-inspired digital rain background effect
 - Typewriter text animations
 - Responsive design for all device sizes
-- Command history navigation
+- Command history navigation (up/down arrows)
+- Tab completion for commands
+- Terminal sound effects (keystrokes, execution, etc.)
+- Downloadable resume
 - Modern terminal-style UI with glowing text effects
 
 ## 💻 Commands
@@ -22,6 +25,8 @@ The terminal accepts the following commands:
 - `skills` - View my technical skills
 - `projects` - Check out my projects
 - `contact` - Get my contact information
+- `resume` - Download my resume as PDF
+- `sound` - Toggle terminal sound effects
 - `clear` - Clear the terminal
 - `exit` - Reload the page
 
@@ -52,9 +57,15 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) to see the portfolio in action.
 
-## 📝 License
+## 🔊 Sound Effects
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+The terminal includes sound effects for an immersive experience:
+- Keystroke sounds
+- Command execution sounds
+- Error sounds
+- Success sounds
+
+You can toggle sounds on/off using the sound button in the terminal header or the `sound` command.
 
 ## 📬 Contact
 

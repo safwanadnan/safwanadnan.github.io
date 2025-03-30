@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { motion } from 'framer-motion';
-import { FiTerminal, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { FiTerminal, FiGithub, FiLinkedin, FiMail, FiDownload, FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { useSounds } from './SoundManager';
 
 type Command = {
   input: string;
@@ -10,7 +11,7 @@ type Command = {
 };
 
 // Available commands for tab completion
-const AVAILABLE_COMMANDS = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'exit'];
+const AVAILABLE_COMMANDS = ['help', 'about', 'skills', 'projects', 'contact', 'clear', 'exit', 'resume', 'sound'];
 
 export default function Terminal() {
   const [commands, setCommands] = useState<Command[]>([]);
@@ -21,6 +22,7 @@ export default function Terminal() {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { playSound, isMuted, toggleMute } = useSounds();
 
   const [text] = useTypewriter({
     words: [
@@ -81,6 +83,7 @@ export default function Terminal() {
     if (matchingCommands.length === 1) {
       // If exactly one match, complete the command
       setInput(matchingCommands[0]);
+      playSound('keystroke');
     } else if (matchingCommands.length > 1) {
       // If multiple matches, show suggestions
       const output = (
@@ -94,7 +97,22 @@ export default function Terminal() {
         </div>
       );
       setCommands([...commands, { input: input, output }]);
+      playSound('execution');
     }
+  };
+
+  // Handle resume download
+  const handleResumeDownload = () => {
+    // Create a download link element
+    const link = document.createElement('a');
+    link.href = '/files/resume.pdf';
+    link.download = 'resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Play success sound
+    playSound('success');
   };
 
   const processCommand = (cmd: string) => {
@@ -113,6 +131,9 @@ export default function Terminal() {
     
     let output: React.ReactNode;
     
+    // Play command execution sound
+    playSound('execution');
+    
     switch (commandLower) {
       case 'help':
         output = (
@@ -123,6 +144,8 @@ export default function Terminal() {
               <li><span className="terminal-highlight">skills</span> - View my technical skills</li>
               <li><span className="terminal-highlight">projects</span> - Check out my projects</li>
               <li><span className="terminal-highlight">contact</span> - Get my contact information</li>
+              <li><span className="terminal-highlight">resume</span> - Download my resume</li>
+              <li><span className="terminal-highlight">sound</span> - Toggle terminal sounds</li>
               <li><span className="terminal-highlight">clear</span> - Clear the terminal</li>
               <li><span className="terminal-highlight">exit</span> - Close the terminal (reloads page)</li>
             </ul>
@@ -233,6 +256,45 @@ export default function Terminal() {
         );
         break;
       
+      case 'resume':
+        handleResumeDownload();
+        output = (
+          <div className="py-2">
+            <p className="flex items-center gap-2">
+              <FiDownload className="text-green-400" />
+              <span className="terminal-text">Downloading resume...</span>
+            </p>
+            <p className="mt-2 text-sm">
+              Resume has been downloaded to your computer.
+            </p>
+          </div>
+        );
+        break;
+      
+      case 'sound':
+      case 'sounds':
+      case 'mute':
+      case 'unmute':
+        toggleMute();
+        output = (
+          <div className="py-2">
+            <p className="flex items-center gap-2">
+              {isMuted ? (
+                <>
+                  <FiVolumeX className="text-yellow-400" />
+                  <span>Sound effects are now disabled.</span>
+                </>
+              ) : (
+                <>
+                  <FiVolume2 className="text-green-400" />
+                  <span>Sound effects are now enabled.</span>
+                </>
+              )}
+            </p>
+          </div>
+        );
+        break;
+      
       case 'clear':
         setCommands([]);
         return;
@@ -241,6 +303,7 @@ export default function Terminal() {
         output = (
           <p className="terminal-warning">Closing terminal session...</p>
         );
+        playSound('error');
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -251,6 +314,7 @@ export default function Terminal() {
         break;
       
       default:
+        playSound('error');
         output = (
           <p className="terminal-error">Command not found: {cmd}. Type 'help' for available commands.</p>
         );
@@ -261,6 +325,11 @@ export default function Terminal() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Play keystroke sound for all keypresses
+    if (e.key !== 'Tab' && e.key !== 'Enter' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+      playSound('keystroke');
+    }
+    
     if (e.key === 'Enter') {
       processCommand(input);
     } 
@@ -304,11 +373,12 @@ export default function Terminal() {
       className="w-full max-w-4xl mx-auto"
     >
       <div className="bg-black border border-green-500 rounded-lg overflow-hidden shadow-lg shadow-green-500/20">
-        <div className="flex items-center gap-2 bg-black px-4 py-2 border-b border-green-500/50">
-          <FiTerminal className="text-green-500" />
-          <h2 className="text-green-500 font-bold">safwan@portfolio:~</h2>
+        <div className="flex items-center justify-between bg-black px-4 py-2 border-b border-green-500/50">
+          <div className="flex items-center gap-2">
+            <FiTerminal className="text-green-500" />
+            <h2 className="text-green-500 font-bold">safwan@portfolio:~</h2>
+          </div>
         </div>
-        
         <div 
           ref={terminalRef}
           onClick={() => inputRef.current?.focus()}
