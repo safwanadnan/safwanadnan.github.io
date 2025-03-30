@@ -8,7 +8,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/safwanadnan/safwanadnan.github.io)](https://github.com/safwanadnan/safwanadnan.github.io/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-![Terminal Portfolio Demo](public\images\image.png)
+![Terminal Portfolio Demo](public/images/image.png)
 *Interactive terminal-themed developer portfolio with command-line interface.*
 
 ## 📋 Table of Contents
