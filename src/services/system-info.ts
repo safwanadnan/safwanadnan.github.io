@@ -17,7 +17,7 @@ export interface SystemInfo {
 
 export const getSystemInfo = (): SystemInfo => {
   // Default values
-  let info: SystemInfo = {
+  const info: SystemInfo = {
     os: 'Unknown OS',
     browser: 'Unknown Browser',
     browserVersion: '',
@@ -75,11 +75,11 @@ export const getSystemInfo = (): SystemInfo => {
 
   // Try to estimate memory usage (not accurate, just for display)
   try {
-    // @ts-ignore - Performance memory is not standard but available in some browsers
+    // @ts-expect-error - Performance memory is not standard but available in some browsers
     if (performance && performance.memory) {
-      // @ts-ignore
+      // @ts-expect-error
       const usedHeap = Math.round(performance.memory.usedJSHeapSize / (1024 * 1024));
-      // @ts-ignore
+      // @ts-expect-error
       const totalHeap = Math.round(performance.memory.jsHeapSizeLimit / (1024 * 1024));
       info.memoryUsage = `${usedHeap}MB / ${totalHeap}MB`;
     }

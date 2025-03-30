@@ -939,13 +939,6 @@ export default function Terminal() {
             <FiTerminal className="text-green-500" />
             <h2 className="text-green-500 font-bold">safwan@portfolio:{currentDirectory}</h2>
           </div>
-          <button 
-            onClick={toggleMute} 
-            className="text-green-500 hover:text-green-400 transition-colors"
-            aria-label={isMuted ? "Unmute terminal sounds" : "Mute terminal sounds"}
-          >
-            {isMuted ? <FiVolumeX size={18} /> : <FiVolume2 size={18} />}
-          </button>
         </div>
         <div 
           ref={terminalRef}
@@ -961,13 +954,11 @@ export default function Terminal() {
           >
             <pre className="text-green-400 text-xs sm:text-sm lg:text-base whitespace-pre-wrap">
 {`
-  _____       __                       _____    _             
- / ____|     / _|                     |  __ \\  | |            
-| (___   __ _| |___      ____ _ _ __  | |__) |_| |_ ___       
- \\___ \\ / _\` |  _\\ \\ /\\ / / _\` | '_ \\ |  ___/ _| __/ _ \\      
- ____) | (_| | |  \\ V  V / (_| | | | || |  | | | || (_) |_ _ _
-|_____/ \\__,_|_|   \\_/\\_/ \\__,_|_| |_||_|  |_|_|\\__\\___(_|_|_)
-                                                              
+███████  █████  ███████ ██     ██  █████  ███    ██ ██████   ██████  ███    ██ ████████ ███    ███ ██ ███████ ███████ 
+██      ██   ██ ██      ██     ██ ██   ██ ████   ██ ██   ██ ██    ██ ████   ██    ██    ████  ████ ██ ██      ██      
+███████ ███████ █████   ██  █  ██ ███████ ██ ██  ██ ██   ██ ██    ██ ██ ██  ██    ██    ██ ████ ██ ██ ███████ ███████ 
+     ██ ██   ██ ██      ██ ███ ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██  ██ ██    ██    ██  ██  ██ ██      ██      ██ 
+███████ ██   ██ ██       ███ ███  ██   ██ ██   ████ ██████   ██████  ██   ████    ██    ██      ██ ██ ███████ ███████ 
 `}
             </pre>
             <p className="text-green-400 mt-2">{text}<Cursor cursorStyle="_" /></p>
