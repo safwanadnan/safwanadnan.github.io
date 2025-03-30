@@ -80,7 +80,7 @@ Navigate the portfolio using these terminal commands:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/terminal-portfolio.git
+git clone https://github.com/safwanadnan/terminal-portfolio.git
 
 # Navigate to project directory
 cd terminal-portfolio
