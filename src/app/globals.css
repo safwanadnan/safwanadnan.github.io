@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 255, 0;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --terminal-green: #00ff00;
+  --terminal-blue: #0077ff;
+  --terminal-red: #ff5555;
+  --terminal-yellow: #ffff00;
+  --terminal-purple: #9c27b0;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: var(--font-mono);
+}
+
+@layer utilities {
+  .terminal-text {
+    color: var(--terminal-green);
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+  }
+  
+  .terminal-header {
+    color: var(--terminal-blue);
+    text-shadow: 0 0 5px rgba(0, 119, 255, 0.7);
+  }
+  
+  .terminal-error {
+    color: var(--terminal-red);
+    text-shadow: 0 0 5px rgba(255, 85, 85, 0.7);
+  }
+  
+  .terminal-warning {
+    color: var(--terminal-yellow);
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.7);
+  }
+  
+  .terminal-highlight {
+    color: var(--terminal-purple);
+    text-shadow: 0 0 5px rgba(156, 39, 176, 0.7);
+  }
+  
+  .terminal-box {
+    border: 1px solid var(--terminal-green);
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  }
+  
+  .typing-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: var(--terminal-green);
+    animation: blink 1s step-end infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .glitch {
+    position: relative;
+    animation: glitch 1s linear infinite;
+  }
+  
+  @keyframes glitch {
+    2%, 8%, 14%, 40%, 42% {
+      transform: translate(-2px, 0) skew(0deg);
+    }
+    4%, 6%, 10%, 16%, 44% {
+      transform: translate(2px, 0) skew(0deg);
+    }
+    62%, 64%, 98% {
+      transform: translate(0, 0) skew(5deg);
+    }
+  }
+}
