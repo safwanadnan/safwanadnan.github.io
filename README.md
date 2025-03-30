@@ -3,12 +3,12 @@
 > A fully customizable, interactive terminal-themed portfolio template for developers, built with React, TypeScript, and Tailwind CSS. Features command-line navigation, Matrix background effects, GitHub activity integration, and a virtual file system.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/safwanadnan/terminal-portfolio?style=social)](https://github.com/safwanadnan/terminal-portfolio/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/terminal-portfolio/network)](https://github.com/safwanadnan/terminal-portfolio/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/safwanadnan/terminal-portfolio)](https://github.com/safwanadnan/terminal-portfolio/issues)
+[![GitHub stars](https://img.shields.io/github/stars/safwanadnan/safwanadnan.github.io?style=social)](https://github.com/safwanadnan/safwanadnan.github.io/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/safwanadnan.github.io/network)](https://github.com/safwanadnan/safwanadnan.github.io/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/safwanadnan/safwanadnan.github.io)](https://github.com/safwanadnan/safwanadnan.github.io/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-![Terminal Portfolio Demo](https://example.com/terminal-portfolio-screenshot.png)
+![Terminal Portfolio Demo](public\images\image.png)
 *Interactive terminal-themed developer portfolio with command-line interface.*
 
 ## 📋 Table of Contents
@@ -53,7 +53,7 @@ Terminal Portfolio is a modern, interactive portfolio template designed for deve
 
 ## 🔍 Demo
 
-[View Live Demo](https://your-demo-url-here.com) | [View GitHub Repository](https://github.com/safwanadnan/terminal-portfolio)
+[View Live Demo](https://safwanadnan.github.io/) | [View GitHub Repository](https://github.com/safwanadnan/safwanadnan.github.io)
 
 ## 💻 Commands
 
@@ -80,7 +80,7 @@ Navigate the portfolio using these terminal commands:
 
 ```bash
 # Clone the repository
-git clone https://github.com/safwanadnan/terminal-portfolio.git
+git clone https://github.com/safwanadnan/safwanadnan.github.io.git terminal-portfolio
 
 # Navigate to project directory
 cd terminal-portfolio
@@ -211,17 +211,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <p align="center">
-  <a href="https://github.com/safwanadnan/terminal-portfolio">
-    <img src="https://img.shields.io/github/stars/safwanadnan/terminal-portfolio?style=social" alt="GitHub stars">
+  <a href="https://github.com/safwanadnan/safwanadnan.github.io">
+    <img src="https://img.shields.io/github/stars/safwanadnan/safwanadnan.github.io?style=social" alt="GitHub stars">
   </a>
-  <a href="https://github.com/safwanadnan/terminal-portfolio/network/members">
-    <img src="https://img.shields.io/github/forks/safwanadnan/terminal-portfolio?style=social" alt="GitHub forks">
+  <a href="https://github.com/safwanadnan/safwanadnan.github.io/network/members">
+    <img src="https://img.shields.io/github/forks/safwanadnan/safwanadnan.github.io?style=social" alt="GitHub forks">
   </a>
-  <a href="https://github.com/safwanadnan/terminal-portfolio/issues">
-    <img src="https://img.shields.io/github/issues/safwanadnan/terminal-portfolio" alt="GitHub issues">
+  <a href="https://github.com/safwanadnan/safwanadnan.github.io/issues">
+    <img src="https://img.shields.io/github/issues/safwanadnan/safwanadnan.github.io" alt="GitHub issues">
   </a>
-  <a href="https://github.com/safwanadnan/terminal-portfolio/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/safwanadnan/terminal-portfolio" alt="License">
+  <a href="https://github.com/safwanadnan/safwanadnan.github.io/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/safwanadnan/safwanadnan.github.io" alt="License">
   </a>
 </p>
 
